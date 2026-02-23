@@ -1007,7 +1007,39 @@
   @media (max-width: 640px) {
     .mobile-menu-toggle { display: flex; }
     .nav-left, .nav-right { display: none; }
-    .hero h1 { font-size: 2.2rem; }
+    .nav-links { display: none !important; }
+    .site-header { 
+      flex-direction: column !important; 
+      padding: 15px 20px 10px !important;
+      gap: 15px;
+    }
+    .site-header > div:first-child {
+      order: 2;
+      justify-content: center !important;
+    }
+    .site-header > a {
+      order: 1;
+      flex: none !important;
+    }
+    .site-header > a img {
+      height: 180px !important;
+    }
+    .site-header > div:last-child {
+      order: 3;
+      text-align: center !important;
+      flex: none !important;
+    }
+    .site-header > div:last-child a {
+      padding: 14px 28px !important;
+      font-size: 0.85rem !important;
+    }
+    .hero { grid-template-columns: 1fr !important; }
+    .hero-content { 
+      margin-right: 0 !important; 
+      padding: 40px 20px !important;
+    }
+    .hero h1 { font-size: 2rem; }
+    .hero-image { height: 50vh; }
     .section-title { font-size: 2rem; }
     .services-grid { grid-template-columns: 1fr; }
     .conditions-grid { grid-template-columns: 1fr 1fr; }
