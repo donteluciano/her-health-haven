@@ -1725,3 +1725,65 @@
     }
   });
 </script>
+<style>
+  /* Floating Book CTA Button */
+  .floating-cta {
+    position: fixed;
+    bottom: 100px;
+    right: 24px;
+    z-index: 999;
+    background: var(--berry);
+    color: var(--cream);
+    padding: 14px 24px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(155,45,94,0.3);
+    transition: all 0.3s;
+    display: none;
+  }
+  .floating-cta:hover {
+    background: var(--berry-deep);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 28px rgba(155,45,94,0.4);
+  }
+  .floating-cta.visible {
+    display: block;
+  }
+  
+  /* Mobile nav - show Book a Call button */
+  @media (max-width: 640px) {
+    .nav-right { 
+      display: flex !important; 
+      gap: 0 !important;
+    }
+    .nav-right a:not(:last-child) { 
+      display: none; 
+    }
+    .nav-right a:last-child {
+      background: var(--berry);
+      color: var(--cream);
+      padding: 10px 16px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+    }
+  }
+</style>
+
+<!-- Floating CTA -->
+<a href="#" class="floating-cta" id="floatingCta">Book Free Call</a>
+
+<script>
+  // Show floating CTA after scrolling past hero
+  window.addEventListener('scroll', function() {
+    const floatingCta = document.getElementById('floatingCta');
+    if (window.scrollY > 600) {
+      floatingCta.classList.add('visible');
+    } else {
+      floatingCta.classList.remove('visible');
+    }
+  });
+</script>
