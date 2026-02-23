@@ -1177,15 +1177,15 @@
   <div class="section-title">Transparent pricing</div>
   <div class="section-subtitle">No hidden fees, no surprises. Just straightforward care that fits your needs.</div>
 
-  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 1100px; margin: 0 auto;">
-    <div style="background: var(--white); padding: 44px 32px; border-radius: 2px; border: 1px solid rgba(155,45,94,0.06); text-align: center;">
+  <div class="pricing-grid">
+    <div class="pricing-card">
       <div style="font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 16px;">Discovery Call</div>
       <div style="font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 500; color: var(--berry-deep); line-height: 1;">Free</div>
       <div style="font-size: 0.85rem; color: var(--text-light); margin-top: 8px; margin-bottom: 24px;">30 minutes</div>
       <p style="font-size: 0.88rem; line-height: 1.7; color: var(--text-light); margin-bottom: 24px;">A no-pressure conversation to discuss your goals, your struggles, and whether we're the right fit for you.</p>
       <a href="#" class="btn-primary" style="width: 100%; text-align: center;">Book Free Call</a>
     </div>
-    <div style="background: var(--white); padding: 44px 32px; border-radius: 2px; border: 2px solid var(--berry); text-align: center; position: relative; overflow: hidden;">
+    <div class="pricing-card pricing-card-featured">
       <div style="position: absolute; top: 14px; right: -32px; background: var(--berry); color: var(--cream); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 36px; transform: rotate(45deg); font-weight: 500;">Popular</div>
       <div style="font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 16px;">One-on-One Coaching</div>
       <div style="font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 500; color: var(--berry-deep); line-height: 1;">$50<span style="font-size: 1rem; font-weight: 400; color: var(--text-light);">–</span>$150</div>
@@ -1193,7 +1193,7 @@
       <p style="font-size: 0.88rem; line-height: 1.7; color: var(--text-light); margin-bottom: 24px;">Weekly or biweekly sessions with custom meal plans, lab work review, and ongoing support between appointments.</p>
       <a href="#" class="btn-primary" style="width: 100%; text-align: center;">Get Started</a>
     </div>
-    <div style="background: var(--white); padding: 44px 32px; border-radius: 2px; border: 1px solid rgba(155,45,94,0.06); text-align: center;">
+    <div class="pricing-card">
       <div style="font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 16px;">Group Programs</div>
       <div style="font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 500; color: var(--berry-deep); line-height: 1;">TBD</div>
       <div style="font-size: 0.85rem; color: var(--text-light); margin-top: 8px; margin-bottom: 24px;">12-week cohorts · coming soon</div>
@@ -1666,3 +1666,65 @@
 
 </body>
 </html>
+<style>
+  /* Pricing Grid - Horizontal Scroll on Mobile */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .pricing-card {
+    background: var(--white);
+    padding: 44px 32px;
+    border-radius: 2px;
+    border: 1px solid rgba(155,45,94,0.06);
+    text-align: center;
+  }
+  .pricing-card-featured {
+    border: 2px solid var(--berry);
+    position: relative;
+    overflow: hidden;
+  }
+  @media (max-width: 900px) {
+    .pricing-grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 16px;
+      padding: 0 20px 20px;
+      margin: 0 -20px;
+    }
+    .pricing-grid::after {
+      content: '';
+      flex-shrink: 0;
+      width: 1px;
+    }
+    .pricing-card {
+      flex: 0 0 85%;
+      min-width: 280px;
+      max-width: 340px;
+      scroll-snap-align: center;
+    }
+    /* Start scrolled to center (featured) card */
+    .pricing-grid {
+      scroll-padding: 0 calc(50% - 160px);
+    }
+  }
+</style>
+<script>
+  // Scroll pricing to center (featured) card on mobile
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.innerWidth <= 900) {
+      const pricingGrid = document.querySelector('.pricing-grid');
+      const featuredCard = document.querySelector('.pricing-card-featured');
+      if (pricingGrid && featuredCard) {
+        setTimeout(() => {
+          featuredCard.scrollIntoView({ inline: 'center', behavior: 'auto', block: 'nearest' });
+        }, 100);
+      }
+    }
+  });
+</script>
