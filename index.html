@@ -911,7 +911,107 @@
     .blog-grid { grid-template-columns: 1fr 1fr; }
     .footer-grid { grid-template-columns: 1fr 1fr; }
   }
+  /* ===== MOBILE MENU ===== */
+  .mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 28px;
+    height: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 1001;
+  }
+  .mobile-menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--berry);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .mobile-menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 1001;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .mobile-menu-overlay.open {
+    display: block;
+    opacity: 1;
+  }
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -280px;
+    width: 280px;
+    height: 100vh;
+    background: var(--cream);
+    z-index: 1002;
+    transition: right 0.3s ease;
+    box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+  }
+  .mobile-menu.open {
+    right: 0;
+  }
+  .mobile-menu-close {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--berry);
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+  .mobile-menu-links {
+    display: flex;
+    flex-direction: column;
+    padding: 70px 30px 30px;
+    gap: 0;
+  }
+  .mobile-menu-links a {
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    text-decoration: none;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(140,47,91,0.1);
+    transition: color 0.2s;
+  }
+  .mobile-menu-links a:hover {
+    color: var(--berry);
+  }
+  .mobile-menu-links .mobile-menu-cta {
+    margin-top: 20px;
+    background: var(--berry);
+    color: var(--white);
+    text-align: center;
+    padding: 16px 24px;
+    border-radius: 4px;
+    border-bottom: none;
+  }
+  .mobile-menu-links .mobile-menu-cta:hover {
+    background: var(--berry-deep);
+    color: var(--white);
+  }
+
   @media (max-width: 640px) {
+    .mobile-menu-toggle { display: flex; }
     .nav-left, .nav-right { display: none; }
     .hero h1 { font-size: 2.2rem; }
     .section-title { font-size: 2rem; }
@@ -931,11 +1031,16 @@
 
 <!-- ANNOUNCEMENT BAR -->
 <div class="announcement-bar">
-  Now accepting new clients in NJ, NY, CA & FL — <a href="#">Book your free discovery call</a>
+  Now accepting new clients in NJ, NY, CA & FL — <a href="https://calendly.com/BRIANNA-CALENDLY-URL" target="_blank">Book your free discovery call</a>
 </div>
 
 <!-- NAVIGATION -->
 <nav>
+  <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
   <div class="nav-left">
     <a href="#">Home</a>
     <a href="#">Services</a>
@@ -951,26 +1056,52 @@
   <div class="nav-right">
     <a href="#">Resources</a>
     <a href="#">About</a>
-    <a href="#">Book a Call</a>
+    <a href="https://calendly.com/BRIANNA-CALENDLY-URL" target="_blank">Book a Call</a>
   </div>
 </nav>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">✕</button>
+  <div class="mobile-menu-links">
+    <a href="#">Home</a>
+    <a href="#">Services</a>
+    <a href="#">Conditions</a>
+    <a href="#">Resources</a>
+    <a href="#">About</a>
+    <a href="https://calendly.com/BRIANNA-CALENDLY-URL" target="_blank" class="mobile-menu-cta">Book a Call</a>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero" style="padding: 0;">
   <div class="hero-content">
-    <div class="hero-tag">Registered Dietitian · Women's Health Counselors</div>
+    <div class="hero-tag" style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
+      <span style="font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 500; color: var(--berry-deep); letter-spacing: 0.02em; text-transform: none;">Brianna Bronaugh RDN</span>
+      <span style="font-family: 'Outfit', sans-serif; font-size: 0.75rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold);">Registered Dietitian Nutritionist</span>
+    </div>
     <h1>Your health concerns <em>deserve</em> someone who actually listens.</h1>
     <p class="hero-body">Personalized, holistic nutrition counseling for women navigating PCOS, fertility, menopause, gut issues, thyroid conditions, weight management, and more — because your symptoms deserve more than a 10-minute appointment.</p>
     <div class="hero-ctas">
-      <a href="#" class="btn-primary">Book Free Discovery Call</a>
-      <a href="#" class="btn-secondary">Learn More</a>
+      <a href="https://calendly.com/BRIANNA-CALENDLY-URL" target="_blank" class="btn-primary" id="heroBookCall">Book Free Discovery Call</a>
+      <a href="#faq" class="btn-secondary">Have More Questions?</a>
+    </div>
+    <div style="margin-top: 16px;">
+      <a href="#about" class="btn-secondary">Learn More</a>
+    </div>
+    <div style="margin-top: 32px; text-align: center;">
+      <span style="font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        Scroll to learn more
+      </span>
     </div>
   </div>
   <div class="hero-image">
     <div class="hero-image-inner">
       <div class="placeholder-photo">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 12 0v1"/></svg>
-        Your wife's professional photo here
+        Brianna Bronaugh, RDN
       </div>
     </div>
   </div>
@@ -988,14 +1119,12 @@
       <div class="voice-card"><span class="voice-quote">"He said my symptoms were 'just stress' and sent me home."</span></div>
       <div class="voice-card"><span class="voice-quote">"I've been to four different doctors. None of them agree on what's wrong."</span></div>
       <div class="voice-card"><span class="voice-quote">"She told me this is just what happens when you get older."</span></div>
-      <div class="voice-card"><span class="voice-quote">"I brought a list of symptoms and he literally laughed."</span></div>
       <!-- Duplicate for infinite scroll -->
       <div class="voice-card"><span class="voice-quote">"My doctor told me to just lose weight and my symptoms would go away."</span></div>
       <div class="voice-card"><span class="voice-quote">"I was in and out in 8 minutes. She didn't even look at my labs."</span></div>
       <div class="voice-card"><span class="voice-quote">"He said my symptoms were 'just stress' and sent me home."</span></div>
       <div class="voice-card"><span class="voice-quote">"I've been to four different doctors. None of them agree on what's wrong."</span></div>
       <div class="voice-card"><span class="voice-quote">"She told me this is just what happens when you get older."</span></div>
-      <div class="voice-card"><span class="voice-quote">"I brought a list of symptoms and he literally laughed."</span></div>
     </div>
   </div>
 
@@ -1019,7 +1148,7 @@
 
   <p class="voices-bottom">If any of this feels familiar — <strong>you're not crazy, you're not dramatic, and you're not alone.</strong></p>
   <div style="text-align: center; margin-top: 28px;">
-    <a href="#" class="btn-primary">You Deserve Better — Book a Free Call</a>
+    <a href="https://calendly.com/BRIANNA-CALENDLY-URL" target="_blank" class="btn-primary">You Deserve Better — Book a Free Call</a>
   </div>
 </section>
 
@@ -1112,7 +1241,7 @@
       <p>I founded Her Health Haven because I watched too many women get dismissed by their doctors — told their symptoms were "normal," handed a prescription, and sent on their way.</p>
       <p>I believe managing your health symptoms requires a holistic, proactive approach that combines nutrition, sleep management, fitness, and overall wellness. Not just treating what's in front of us, but getting to the root of what's happening in your body.</p>
       <p>Whether you're dealing with stubborn weight, hormonal chaos, gut issues, or you're trying to conceive — I'm here to build a plan that's tailored to your body, your life, and your goals.</p>
-      <div class="about-signature">— [Your Wife's Name], RDN</div>
+      <div class="about-signature">— Brianna Bronaugh, RDN</div>
     </div>
   </div>
 </section>
@@ -1175,7 +1304,7 @@
       <div style="font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 500; color: var(--berry-deep); line-height: 1;">Free</div>
       <div style="font-size: 0.85rem; color: var(--text-light); margin-top: 8px; margin-bottom: 24px;">30 minutes</div>
       <p style="font-size: 0.88rem; line-height: 1.7; color: var(--text-light); margin-bottom: 24px;">A no-pressure conversation to discuss your goals, your struggles, and whether we're the right fit for you.</p>
-      <a href="#" class="btn-primary" style="width: 100%; text-align: center;">Book Free Call</a>
+      <a href="https://calendly.com/BRIANNA-CALENDLY-URL" target="_blank" class="btn-primary" style="width: 100%; text-align: center;">Book Free Call</a>
     </div>
     <div class="pricing-card pricing-card-featured">
       <div style="position: absolute; top: 14px; right: -32px; background: var(--berry); color: var(--cream); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 36px; transform: rotate(45deg); font-weight: 500;">Popular</div>
@@ -1265,57 +1394,9 @@
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="testimonials">
-  <div class="section-tag">Client Love</div>
-  <div class="section-title">Real women. Real results.</div>
-  <div class="section-subtitle">These are placeholder testimonials — your wife's client testimonials will go here.</div>
+<!-- TESTIMONIALS - Temporarily removed, can be added back later -->
 
-  <div class="testimonials-grid">
-    <div class="testimonial-card">
-      <p class="testimonial-text">For the first time in years, I feel like someone actually listened to me. My meal plan is realistic, my energy is back, and I've lost 15 pounds without feeling deprived.</p>
-      <div class="testimonial-author">
-        <div class="testimonial-avatar"></div>
-        <div>
-          <div class="testimonial-name">Client Name</div>
-          <div class="testimonial-detail">PCOS · Weight Management</div>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-card">
-      <p class="testimonial-text">After three years of trying to conceive, I finally found someone who approached my fertility holistically. I'm now 16 weeks pregnant and feeling incredible.</p>
-      <div class="testimonial-author">
-        <div class="testimonial-avatar"></div>
-        <div>
-          <div class="testimonial-name">Client Name</div>
-          <div class="testimonial-detail">Fertility · Nutrition</div>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-card">
-      <p class="testimonial-text">My doctor told me my perimenopause symptoms were "just part of aging." She actually helped me understand what was happening and gave me a real plan to manage it.</p>
-      <div class="testimonial-author">
-        <div class="testimonial-avatar"></div>
-        <div>
-          <div class="testimonial-name">Client Name</div>
-          <div class="testimonial-detail">Perimenopause · Wellness</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURED IN -->
-<section class="featured">
-  <div class="section-tag">As Featured In</div>
-  <div class="featured-logos">
-    <span class="featured-logo">Publication</span>
-    <span class="featured-logo">Podcast</span>
-    <span class="featured-logo">Media</span>
-    <span class="featured-logo">Magazine</span>
-    <span class="featured-logo">Network</span>
-  </div>
-</section>
+<!-- FEATURED IN - Temporarily removed, can be added back later -->
 
 <!-- BLOG PREVIEW -->
 <section class="blog-preview">
@@ -1367,7 +1448,7 @@
   <div class="section-tag">Ready to Start?</div>
   <div class="section-title">Book your free discovery call</div>
   <div class="section-subtitle">A free 30-minute conversation to talk about your goals, your struggles, and how we can build a plan that actually works for your body and your life.</div>
-  <a href="#" class="btn-primary">Schedule Your Call</a>
+  <a href="https://calendly.com/BRIANNA-CALENDLY-URL" target="_blank" class="btn-primary">Schedule Your Call</a>
 </section>
 
 <!-- FOOTER -->
@@ -1656,6 +1737,39 @@
   }
 </script>
 
+<script>
+// Mobile Menu Toggle
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+const mobileMenuClose = document.getElementById('mobileMenuClose');
+
+function openMobileMenu() {
+  mobileMenu.classList.add('open');
+  mobileMenuOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMobileMenu() {
+  mobileMenu.classList.remove('open');
+  mobileMenuOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+mobileMenuToggle.addEventListener('click', openMobileMenu);
+mobileMenuClose.addEventListener('click', closeMobileMenu);
+mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+// Close menu when clicking a link
+document.querySelectorAll('.mobile-menu-links a').forEach(link => {
+  link.addEventListener('click', closeMobileMenu);
+});
+
+// Close on escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeMobileMenu();
+});
+</script>
 </body>
 </html>
 <style>
@@ -1774,7 +1888,7 @@
 </style>
 
 <!-- Floating CTA -->
-<a href="#" class="floating-cta" id="floatingCta">Book Free Call</a>
+<a href="https://calendly.com/BRIANNA-CALENDLY-URL" target="_blank" class="floating-cta" id="floatingCta">Book Free Call</a>
 
 <script>
   // Show floating CTA after scrolling past hero
