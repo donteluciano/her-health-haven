@@ -1184,8 +1184,11 @@
 <style>
   .voices-track-wrapper {
     width: 100%;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
     position: relative;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
   }
   .voices-track-wrapper::before {
     content: '';
@@ -1215,10 +1218,10 @@
     width: max-content;
   }
   .voices-track-1 {
-    animation: scrollLeft 18s linear infinite;
+    /* Static - manual scroll */
   }
   .voices-track-2 {
-    animation: scrollRight 20s linear infinite;
+    /* Static - manual scroll */
   }
   .voice-card {
     flex-shrink: 0;
