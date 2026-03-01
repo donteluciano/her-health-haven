@@ -1010,6 +1010,12 @@
       background-size: cover !important;
       align-items: flex-end !important;
     }
+    .hero-name-badge {
+      display: block !important;
+    }
+    .hero-name-desktop {
+      display: none !important;
+    }
     .hero-content { 
       margin-right: 0 !important; 
       padding: 30px 20px !important;
@@ -1099,8 +1105,12 @@
 <!-- HERO -->
 <section class="hero" style="padding: 0; position: relative; min-height: 90vh; display: flex; align-items: center; background: url('hero-photo.jpg') center top / cover no-repeat;">
   <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.3);"></div>
+  <div class="hero-name-badge" style="position: absolute; top: 30px; left: 0; right: 0; text-align: center; z-index: 3; display: none;">
+    <span style="font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 500; color: #FFFFFF; letter-spacing: 0.02em; display: block;">Bree Bronaugh, RDN</span>
+    <span style="font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: #FFFFFF;">Registered Dietitian Nutritionist</span>
+  </div>
   <div class="hero-content" style="position: relative; z-index: 2; text-align: center; max-width: 900px; margin: 0 auto; padding: 60px 40px;">
-    <div style="margin-bottom: 20px;">
+    <div class="hero-name-desktop" style="margin-bottom: 20px;">
       <span style="font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 500; color: #FFFFFF; letter-spacing: 0.02em; display: block;">Bree Bronaugh, RDN</span>
       <span style="font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: #FFFFFF;">Registered Dietitian Nutritionist</span>
     </div>
