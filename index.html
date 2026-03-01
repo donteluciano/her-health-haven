@@ -1004,13 +1004,26 @@
       padding: 14px 28px !important;
       font-size: 0.85rem !important;
     }
-    .hero { grid-template-columns: 1fr !important; }
+    .hero { 
+      min-height: 80vh !important;
+      background-position: center top !important;
+    }
     .hero-content { 
       margin-right: 0 !important; 
-      padding: 40px 20px !important;
+      padding: 30px 20px !important;
     }
-    .hero h1 { font-size: 2rem; }
-    .hero-image { height: 50vh; }
+    .hero h1 { font-size: 1.8rem !important; line-height: 1.2 !important; }
+    .hero-ctas {
+      flex-direction: column !important;
+      gap: 15px !important;
+    }
+    .hero-ctas span {
+      margin: 0 !important;
+    }
+    .hero-ctas .btn-primary {
+      width: 100% !important;
+      text-align: center !important;
+    }
     .section-title { font-size: 2rem; }
     .services-grid { grid-template-columns: 1fr 1fr; }
     .conditions-grid { grid-template-columns: 1fr; }
